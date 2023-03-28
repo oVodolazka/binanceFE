@@ -1,5 +1,4 @@
 import './App.css';
-import React from 'react';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import { ThemeProvider } from '@mui/material/styles';
@@ -9,42 +8,45 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import Dashboard from './pages/Dashboard';
 import { theme } from './theme';
+import { AppLayout } from './components/AppLayout';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/login"
-              exact
-              element={(
-                <PublicRoute>
-                  <LoginPage />
-                </PublicRoute>
-              )}
-            />
-            <Route
-              path="/registration"
-              exact
-              element={(
-                <PublicRoute >
-                  <RegistrationPage />
-                </PublicRoute>
-              )}
-            />
-            <Route
-              path="/dashboard"
-              exact
-              element={(
-                <PrivateRoute >
-                  <Dashboard />
-                </PrivateRoute>
-              )}
-            />
-          </Routes>
-        </BrowserRouter>
+        <AppLayout>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/login"
+                exact
+                element={(
+                  <PublicRoute>
+                    <LoginPage />
+                  </PublicRoute>
+                )}
+              />
+              <Route
+                path="/registration"
+                exact
+                element={(
+                  <PublicRoute >
+                    <RegistrationPage />
+                  </PublicRoute>
+                )}
+              />
+              <Route
+                path="/dashboard"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <Dashboard />
+                  </PrivateRoute>
+                )}
+              />
+            </Routes>
+          </BrowserRouter>
+         </AppLayout> 
       </AuthProvider>
     </ThemeProvider>
   );

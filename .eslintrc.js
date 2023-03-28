@@ -1,23 +1,26 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+    'parser': 'babel-eslint',
+    'env': {
+        'browser': true,
+        'es6': true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+    'extends': [
+        'eslint:recommended',
+        'plugin:react/recommended'
     ],
-    "overrides": [
+    'overrides': [
     ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    'parserOptions': {
+        'ecmaVersion': 2018,
+        'sourceType': 'module'
     },
-    "plugins": [
-        "react"
+    'plugins': [
+        'react'
     ],
-    "rules": {
-        "react/prop-types": ["off"],
-    }
+    'rules': {
+        'react/prop-types': ['off'],
+        'react/react-in-jsx-scope': 'off',
+        'no-console':'off',
+        'no-undef':'warn'
+    },
 }
-
