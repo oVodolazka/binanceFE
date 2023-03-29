@@ -135,6 +135,7 @@ const LoginPage = () => {
                                 variant="contained"
                                 sx={{
                                     mt: 3, mb: 2, backgroundColor: '#fcc203',
+                                    fontSize:'15px',
                                     '&:hover': {
                                         backgroundColor: '#d69605'
                                     }
@@ -162,7 +163,6 @@ const LoginPage = () => {
                 </Grid>
             </Grid>
         </Grid>
-
     );
 }
 

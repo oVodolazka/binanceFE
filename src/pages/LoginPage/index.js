@@ -98,7 +98,13 @@ const LoginPage = () => {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, backgroundColor: '#fcc203 ' }}
+                                sx={{
+                                    mt: 3, mb: 2, backgroundColor: '#fcc203',
+                                    '&:hover': {
+                                        backgroundColor: '#d69605'
+                                    },
+                                    fontSize:'15px',
+                                }}
                             >
                                 Sign In
                             </Button>
