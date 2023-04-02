@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { List } from '@mui/material';
-import { mainListItems, secondaryListItems } from './ListItems';
+import { MainListItems, secondaryListItems } from './ListItems';
 const drawerWidth = 240;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -57,7 +57,7 @@ const Navigation = () => {
             </Toolbar>
             <Divider />
             <List component="nav">
-                {mainListItems}
+                <MainListItems />
                 <Divider sx={{ my: 1 }} />
                 {secondaryListItems}
             </List>

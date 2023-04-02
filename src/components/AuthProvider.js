@@ -2,7 +2,10 @@ import { Box } from '@mui/material';
 import { useEffect, useState, createContext, useContext } from 'react';
 import api from '../api';
 import CircularProgress from '@mui/material/CircularProgress';
-
+export const useUser = () => {
+    const { user } = useContext(UserContext);
+    return user
+}
 export const UserContext = createContext();
 
 const CircularIndeterminate = () => {
@@ -42,7 +45,7 @@ const AuthProvider = ({ children }) => {
             getMe()
         }
     }, [accessToken])
-
+    
     return (
         <>
             {load ? (
@@ -50,17 +53,12 @@ const AuthProvider = ({ children }) => {
                    <CircularIndeterminate/>
                 </Box>
             ) : (
-                <UserContext.Provider value={{ user, setAccesToken, setUser, logout }}>
+                <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe }}>
                     {children}
                 </UserContext.Provider>
             )}
         </>
     )
-}
-
-export const useUser = () => {
-    const { user } = useContext(UserContext);
-    return user
 }
 
 export default AuthProvider
