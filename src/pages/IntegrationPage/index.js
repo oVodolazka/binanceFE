@@ -8,7 +8,7 @@ import { IntegrationSuccess } from "./IntegrationSuccess";
 
 const Integration = () => {
     const user = useUser();
-    let [binanceKeysExist, setBinanceKeys] = useState(false);
+    let [binanceKeysExist, setBinanceKeysExist] = useState(false);
 
     const userContext = React.useContext(UserContext)
     const { control, handleSubmit } = useForm({
@@ -27,11 +27,11 @@ const Integration = () => {
     };
 
     useEffect(() => {
-        setBinanceKeys(user.binanceKeysExist)
+        setBinanceKeysExist(user.binanceKeysExist)
     }, [user.binanceKeysExist])
 
     const onEditKeys = () => {
-        setBinanceKeys(false);
+        setBinanceKeysExist(false);
     }
     const onRemoveKeys = async () => {
         try {

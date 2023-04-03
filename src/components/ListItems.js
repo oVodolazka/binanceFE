@@ -9,20 +9,20 @@ import { useNavigate } from 'react-router-dom';
 export const MainListItems = () => {
   const navigate = useNavigate();
 
-  const handleClickIntegration = () => {
+  const goToIntegration = () => {
     navigate('/integration');
   }
-  const handleClickDashboard = () => {
+  const goToDashboard = () => {
     navigate('/dashboard');
   }
   return <>
-    <ListItemButton onClick={handleClickDashboard}>
+    <ListItemButton onClick={goToDashboard}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton onClick={handleClickIntegration}>
+    <ListItemButton onClick={goToIntegration}>
       <ListItemIcon>
         <ShareIcon />
       </ListItemIcon>
