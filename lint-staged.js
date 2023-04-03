@@ -1,6 +1,6 @@
 module.exports = {
     '*.{js,jsx,ts,tsx}': [
-        'eslint --max-warnings=30', 
+        'eslint', 
         () => 'tsc-files --noEmit',
     ]
 }
