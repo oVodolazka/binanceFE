@@ -9,13 +9,14 @@ import PublicRoute from './components/PublicRoute';
 import Dashboard from './pages/Dashboard';
 import { theme } from './theme';
 import { AppLayout } from './components/AppLayout';
+import Integration from './pages/IntegrationPage';
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <AppLayout>
-          <BrowserRouter>
+        <BrowserRouter>
+          <AppLayout>
             <Routes>
               <Route
                 path="/login"
@@ -44,9 +45,18 @@ function App() {
                   </PrivateRoute>
                 )}
               />
+              <Route
+                path="/integration"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <Integration />
+                  </PrivateRoute>
+                )}
+              />
             </Routes>
-          </BrowserRouter>
-         </AppLayout> 
+          </AppLayout>
+        </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
   );

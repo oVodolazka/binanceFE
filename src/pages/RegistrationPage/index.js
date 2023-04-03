@@ -25,7 +25,7 @@ const LoginPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            const user = await api.post('/users/register', { name: data.name, email: data.email, password: data.password, confirmPassword: data.confirmPassword })
+            const user = await api.post('/users/register', { name: data.name, email: data.email, password: data.password, confirmPassword: data.confirmPassword})
             window.localStorage.setItem('access_token', user.data.token)
             userContext.setAccesToken(user.data.token)
         } catch (e) {

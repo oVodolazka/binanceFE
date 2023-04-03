@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { useForm, Controller } from "react-hook-form";
 import api from '../../api';
 import { UserContext } from '../../components/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const userContext = React.useContext(UserContext)
@@ -26,6 +27,11 @@ const LoginPage = () => {
         } catch (e) {
             console.log(e)
         }
+    }
+    const navigate = useNavigate();
+
+    const handleClickIntegration = () => {
+        navigate('/registration');
     }
 
     return (
@@ -54,7 +60,7 @@ const LoginPage = () => {
                             }}
                             >
                                 <p>Don&apos;t have an account?&nbsp;&nbsp;</p>
-                                <Link href="#" variant="body2">
+                                <Link href="#" variant="body2" onClick={handleClickIntegration} > 
                                     Sign Up
                                 </Link>
                             </Box>
@@ -103,7 +109,7 @@ const LoginPage = () => {
                                     '&:hover': {
                                         backgroundColor: '#d69605'
                                     },
-                                    fontSize:'15px',
+                                    fontSize: '15px',
                                 }}
                             >
                                 Sign In

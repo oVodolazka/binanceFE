@@ -1,7 +1,7 @@
 module.exports = {
     'parser': 'babel-eslint',
     'env': {
-        'browser': true,
+        'browser': false,
         'es6': true
     },
     'extends': [
@@ -21,6 +21,6 @@ module.exports = {
         'react/prop-types': ['off'],
         'react/react-in-jsx-scope': 'off',
         'no-console':'off',
-        'no-undef':'warn'
+        'no-undef':'warn',
     },
 }
