@@ -151,7 +151,7 @@ const LoginPage = () => {
                 item
                 xs={6}
                 sx={{
-                    background: '#a2b6df',
+                    background: '#5CDB95',
                     display: 'flex',
                     justifyContent: 'start',
                     alignItems: 'center',

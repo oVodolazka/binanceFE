@@ -71,7 +71,7 @@ export const Header = () => {
 
     return (
         <AppBar position="absolute" open={open} sx={{
-            backgroundColor: '#a2b6df',
+            backgroundColor: '#5CDB95',
             margin: '0',
             width: '100%',
             zIndex: '2',

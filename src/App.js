@@ -10,6 +10,8 @@ import Dashboard from './pages/Dashboard';
 import { theme } from './theme';
 import { AppLayout } from './components/AppLayout';
 import Integration from './pages/IntegrationPage';
+import DepositPage from './pages/DepositPage';
+import React from 'react';
 
 const App = () => {
   return (
@@ -51,6 +53,15 @@ const App = () => {
                 element={(
                   <PrivateRoute >
                     <Integration />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/depositpage"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <DepositPage />
                   </PrivateRoute>
                 )}
               />
