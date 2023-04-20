@@ -9,28 +9,28 @@ export const useUser = () => {
 export const UserContext = createContext();
 
 const CircularIndeterminate = () => {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CircularProgress />
-    </Box>
-  );
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+        </Box>
+    );
 }
 
 const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('access_token')
     const [user, setUser] = useState(null)
     const [accessToken, setAccesToken] = useState(token)
-    const [load, setLoad] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const getMe = async () => {
         try {
-            setLoad(true);
+            setLoading(true);
             const data = await api.get('/users/me');
             setUser(data.data.user);
         } catch (error) {
             console.log(error);
         } finally {
-            setLoad(false);
+            setLoading(false);
         }
     }
 
@@ -45,19 +45,18 @@ const AuthProvider = ({ children }) => {
             getMe()
         }
     }, [accessToken])
-    
+
+    if(loading) {
+        return (
+            <Box sx={{ fontSize: '35px', display: 'flex', alignItems: 'center', height: '100vh', justifyContent: 'center' }}>
+                <CircularIndeterminate />
+            </Box>
+        )
+    }
     return (
-        <>
-            {load ? (
-                <Box sx={{ fontSize: '35px', display: 'flex', alignItems: 'center', height: '100vh' , justifyContent: 'center'}}>
-                   <CircularIndeterminate/>
-                </Box>
-            ) : (
-                <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe }}>
-                    {children}
-                </UserContext.Provider>
-            )}
-        </>
+        <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe }}>
+            {children}
+        </UserContext.Provider>
     )
 }
 

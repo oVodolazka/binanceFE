@@ -7,40 +7,40 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QRCode from 'qrcode'
 import { NoIntegration } from "../../components/noIntegration";
 
-const DepositPage = () => {
+const Deposit = () => {
     const [coins, setCoins] = useState([]);
     const [network, setNetwork] = useState('');
     const [coin, setCoin] = useState('');
     const [networkData, setNetworkData] = useState([]);
-    const [address, setaddress] = useState('');
+    const [address, setAddress] = useState('');
+    const [qrImage, setQrImage] = useState('');
     const user = useUser()
 
-    const handleNetworkChange = (event) => {
+    const handleNetworkChange = event => {
         setNetwork(event.target.value);
     };
-    const handleChange = (event) => {
+    const handleChangeCoin = (event) => {
         setCoin(event.target.value);
     };
 
-    const coinsData = coins.map(item => {
+    const coinsData = coins.map((item, index) => {
         const { label, ticker } = item
-        return { value: item.ticker, data: { label, ticker } }
+        return { value: ticker, id: index, data: { label, ticker } }
     })
 
     const generateQR = async text => {
-        try {
-            return await QRCode.toDataURL(text)
-        } catch (err) {
-            console.error(err)
-        }
+        return await QRCode.toDataURL(text)
     }
 
-    const getaddress = async (coin, network) => {
-        const response = await api.get('/binance/address', { params: { coin, network } });
-        const qr = await generateQR(JSON.parse(response.data).address)
-        setaddress(<> <p>{JSON.parse(response.data).address}</p> <Button sx={{height:'50px'}} onClick={() => { navigator.clipboard.writeText(JSON.parse(response.data).address) }}><ContentCopyIcon /></Button>
-            <img src={qr}></img>
-        </>)
+    const getAddress = async (coin, network) => {
+        try {
+            const response = await api.get(`/binance/address?coin=${coin}&network=${network}`)
+            const qr = await generateQR(response.data.address)
+            setQrImage(qr);
+            setAddress(response.data.address);
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     const getDepositHistory = async (coin, network) => {
@@ -50,62 +50,58 @@ const DepositPage = () => {
 
     const getDepositCoins = async () => {
         try {
-            const { data } = await api.get('/binance/getcoins');
-            setCoins(data)
+            if (user.binanceKeysExist) {
+                const { data } = await api.get('/binance/getcoins');
+                setCoins(data)
+            }
         } catch (e) {
-            console.log(e)
+            console.error(e)
         }
     }
 
     useEffect(() => {
-        coins.find((item) => {
-            if (item.ticker == coin) {
-                const result = [];
-                let index = 0;
-                const networkList = item.networkList;
-                networkList.forEach(() => {
-                    const elem = networkList[index];
-                    result.push({ value: elem.network, data: { elem } });
-                    index++;
-                });
-                setNetworkData(result);
-            }
-        });
+        if (coin) {
+            const selectedCoinData = coins.find(item => item.ticker == coin)
+            const networksList = selectedCoinData.networkList.map((item, index) => {
+                return ({ value: item.network, id: index, data: { item } })
+            })
+            setNetworkData(networksList);
+        }
     }, [coin])
+
+    useEffect(() => {
+        setNetwork('')
+        setAddress('')
+        setQrImage('')
+    }, [coin])
+
+    useEffect(() => {
+        if (coin && network) {
+            getAddress(coin, network)
+        }
+    }, [network])
 
     useEffect(() => {
         getDepositCoins();
     }, [])
 
-    useEffect(() => {
-        setNetwork('')
-        setaddress('')
-    }, [coin])
-
-
-    useEffect(() => {
-        if (coin && network) {
-            getaddress(coin, network)
-        }
-    }, [network])
-
     if (user.binanceKeysExist) {
         return (
-            <Box sx={{ paddingTop: '130px', paddingLeft: '150px', paddingRight: '150px', backgroundColor: '#F8F8FF', height: '100%' }}>
+            <Box sx={{ paddingTop: '94px', paddingLeft: '30px', paddingRight: '30px', backgroundColor: '#9c9e9d47', height: '100%' }}>
                 <Box sx={{ backgroundColor: '#ffffff', borderRadius: '10px', height: '600px', padding: '50px' }}>
-                    <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '110px' }}>
-                        <Box>Choose currency</Box>
+                    <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '150px' }}>
+                        <p>Choose currency</p>
                         <MuiSelect
                             defaultValue=""
                             value={coin}
                             options={coinsData}
                             label={{ title: 'Coin', id: 'coin-select' }}
                             RenderComponent={CurrencyOptionItem}
-                            onChange={handleChange}
+                            onChange={handleChangeCoin}
                         />
                     </Box>
-                    <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', marginTop: '10px', height: '110px' }}>
-                        <Box>Network</Box>
+                    <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '150px' }}>
+                        <p>Network</p>
                         <MuiSelect
                             defaultValue=""
                             value={network}
@@ -115,18 +111,29 @@ const DepositPage = () => {
                             RenderComponent={NetworkOptionItem}
                         />
                     </Box>
-                    <Box sx={{ display: 'flex', flexFlow: 'row', justifyContent: 'space-between', paddingBottom: '60px', marginTop: '10px', height: '300px' }}>
-                        <Box>Address</Box>
-                        {address}
+                    <Box sx={{ display: 'flex', flexFlow: 'row', paddingBottom: '60px', marginTop: '10px', height: '300px', width: '700px', justifyContent: 'space-between' }}>
+                        <p>Address</p>
+                        <Box sx={{ display: 'flex', flexFlow: 'column', width: '400px' }}>
+                            <Box sx={{ display: 'flex', flexFlow: 'row' }}>
+                                <p>{address}</p>
+                                {address && (
+                                    <Button sx={{ height: '50px' }} onClick={() => { navigator.clipboard.writeText({ address }) }}><ContentCopyIcon /></Button>
+                                )}
+                            </Box>
+                            <Box>
+                                {qrImage && (
+                                    <img src={qrImage} />
+                                )}
+                            </Box>
+                        </Box>
+                        {/* {address} */}
                     </Box>
                     <Button onClick={() => getDepositHistory(coin, network)}>Get history</Button>
                 </Box>
             </Box>
         )
     }
-    return (
-       <NoIntegration/>
-    )
+    return <NoIntegration />
 }
 
 const CurrencyOptionItem = ({ data }) => (
@@ -136,13 +143,11 @@ const CurrencyOptionItem = ({ data }) => (
     </Box>
 )
 
-const NetworkOptionItem = ({ data }) => {
-    return (
-        <Box sx={{ height: '36px', fontSize: '14px' }}>
-            {data.elem.label} <br />
-            ({data.elem.network})
-        </Box>
-    )
-}
+const NetworkOptionItem = ({ data }) => (
+    <Box sx={{ height: '36px', fontSize: '14px' }}>
+        {data.item.label} <br />
+        {data.item.network}
+    </Box>
+)
 
-export default DepositPage
+export default Deposit

@@ -10,8 +10,8 @@ import Dashboard from './pages/Dashboard';
 import { theme } from './theme';
 import { AppLayout } from './components/AppLayout';
 import Integration from './pages/IntegrationPage';
-import DepositPage from './pages/DepositPage';
 import React from 'react';
+import Deposit from './pages/DepositPage';
 
 const App = () => {
   return (
@@ -57,11 +57,11 @@ const App = () => {
                 )}
               />
               <Route
-                path="/depositpage"
+                path="/deposit"
                 exact
                 element={(
                   <PrivateRoute >
-                    <DepositPage />
+                    <Deposit/>
                   </PrivateRoute>
                 )}
               />

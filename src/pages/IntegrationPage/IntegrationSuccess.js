@@ -9,10 +9,12 @@ export const IntegrationSuccess = (props) => {
         props.onRemoveKeys();
     }
     return (
-        <Box sx={{ paddingTop: '130px', paddingLeft: '100px', backgroundColor: '#F8F8FF', height: '100%' }}>
-            <Box sx={{ paddingLeft: '7px' }}>Integration is successfull</Box>
-            <Button onClick={handleReplaceKeys}>Replace keys</Button>
-            <Button onClick={handleDeleteKeys}>Remove keys</Button>
+        <Box sx={{ paddingTop: '94px', paddingLeft: '30px', paddingRight: '30px', backgroundColor: '#9c9e9d47', height: '100%' }}>
+            <Box sx={{ backgroundColor: '#ffffff', borderRadius: '10px', height: '600px', padding: '50px' }}>
+                <Box sx={{ paddingLeft: '7px' }}>Integration is successfull</Box>
+                <Button onClick={handleReplaceKeys}>Replace keys</Button>
+                <Button onClick={handleDeleteKeys}>Remove keys</Button>
+            </Box>
         </Box>
     )
 }

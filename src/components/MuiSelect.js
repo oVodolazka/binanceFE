@@ -3,20 +3,20 @@ import { Box } from '@mui/system';
 import React from 'react';
 
 const MuiSelect = ({ label, onChange, options, RenderComponent, value, }) => {
-    const title = label.title
+    const { id, title } = label;
     return (
         <Box sx={{ minWidth: 400 }}>
             <FormControl fullWidth>
-                <InputLabel id={label.id}>{label.title}</InputLabel>
+                <InputLabel id={id}>{label.title}</InputLabel>
                 <Select
                     name={title}
-                    labelId={label.id}
-                    id={label.id}
+                    labelId={id}
+                    id={id}
                     value={value}
                     label={label.title}
                     onChange={onChange}
                 >
-                    {options.map((item, index) => (
+                    {options.map((item,index) => (
                         <MenuItem
                             key={index}
                             value={item.value}
