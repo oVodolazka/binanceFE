@@ -16,9 +16,9 @@ const MuiSelect = ({ label, onChange, options, RenderComponent, value, }) => {
                     label={label.title}
                     onChange={onChange}
                 >
-                    {options.map((item,index) => (
+                    {options.map((item) => (
                         <MenuItem
-                            key={index}
+                            key={item.id}
                             value={item.value}
                         >
                             <RenderComponent

@@ -53,7 +53,7 @@ const Integration = () => {
                         name="apiKey"
                         control={control}
                         render={({ field }) => {
-                            return <TextField
+                            return (<TextField
                                 {...field}
                                 margin="normal"
                                 required
@@ -63,7 +63,7 @@ const Integration = () => {
                                 type="password"
                                 id="APIKey"
                                 autoComplete="API Key"
-                            />
+                            />)
                         }}
                     />
                     <Controller
@@ -71,7 +71,7 @@ const Integration = () => {
                         control={control}
                         render={({ field, fieldState }) => {
                             const errorMessage = fieldState.error && fieldState.error.message
-                            return <TextField
+                            return (<TextField
                                 {...field}
                                 margin="normal"
                                 required
@@ -83,7 +83,7 @@ const Integration = () => {
                                 autoComplete="Secret Key"
                                 error={!!errorMessage}
                                 helperText={errorMessage}
-                            />
+                            />)
                         }}
                     />
                     <Button

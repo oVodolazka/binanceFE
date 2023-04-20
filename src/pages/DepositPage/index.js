@@ -62,9 +62,8 @@ const Deposit = () => {
     useEffect(() => {
         if (coin) {
             const selectedCoinData = coins.find(item => item.ticker == coin)
-            const networksList = selectedCoinData.networkList.map((item, index) => {
-                return ({ value: item.network, id: index, data: { item } })
-            })
+            const networksList = selectedCoinData.networkList.map((item, index) =>
+                ({ value: item.network, id: index, data: { item } }))
             setNetworkData(networksList);
         }
     }, [coin])
@@ -112,21 +111,23 @@ const Deposit = () => {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', flexFlow: 'row', paddingBottom: '60px', marginTop: '10px', height: '300px', width: '700px', justifyContent: 'space-between' }}>
-                        <p>Address</p>
-                        <Box sx={{ display: 'flex', flexFlow: 'column', width: '400px' }}>
-                            <Box sx={{ display: 'flex', flexFlow: 'row' }}>
-                                <p>{address}</p>
-                                {address && (
-                                    <Button sx={{ height: '50px' }} onClick={() => { navigator.clipboard.writeText({ address }) }}><ContentCopyIcon /></Button>
-                                )}
-                            </Box>
-                            <Box>
-                                {qrImage && (
-                                    <img src={qrImage} />
-                                )}
-                            </Box>
-                        </Box>
-                        {/* {address} */}
+                        {address && (
+                            <>
+                                <p>Address</p>
+                                <Box sx={{ display: 'flex', flexFlow: 'column', width: '400px' }}>
+                                    <Box sx={{ display: 'flex', flexFlow: 'row' }}>
+                                        <p>{address}</p>
+                                        <Button sx={{ height: '50px' }} onClick={() => { navigator.clipboard.writeText({ address }) }}><ContentCopyIcon /></Button>
+                                    </Box>
+                                    <Box>
+                                        {qrImage && (
+                                            <img src={qrImage} />
+                                        )}
+                                    </Box>
+                                </Box>
+                            </>
+                        )}
+
                     </Box>
                     <Button onClick={() => getDepositHistory(coin, network)}>Get history</Button>
                 </Box>
