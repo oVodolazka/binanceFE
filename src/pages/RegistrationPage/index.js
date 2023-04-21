@@ -25,7 +25,7 @@ const LoginPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            const user = await api.post('/users/register', { name: data.name, email: data.email, password: data.password, confirmPassword: data.confirmPassword})
+            const user = await api.post('/users/register', { name: data.name, email: data.email, password: data.password, confirmPassword: data.confirmPassword })
             window.localStorage.setItem('access_token', user.data.token)
             userContext.setAccesToken(user.data.token)
         } catch (e) {
@@ -56,7 +56,7 @@ const LoginPage = () => {
                                 name="name"
                                 control={control}
                                 render={({ field }) => {
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         autoFocus
                                         margin="normal"
@@ -66,14 +66,14 @@ const LoginPage = () => {
                                         label="Name"
                                         name="name"
                                         autoComplete="name"
-                                    />
+                                    />)
                                 }}
                             />
                             <Controller
                                 name="email"
                                 control={control}
                                 render={({ field }) => {
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         autoFocus
                                         margin="normal"
@@ -83,14 +83,14 @@ const LoginPage = () => {
                                         label="Email Address"
                                         name="email"
                                         autoComplete="email"
-                                    />
+                                    />)
                                 }}
                             />
                             <Controller
                                 name="password"
                                 control={control}
                                 render={({ field }) => {
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         margin="normal"
                                         required
@@ -100,7 +100,7 @@ const LoginPage = () => {
                                         type="password"
                                         id="password"
                                         autoComplete="password"
-                                    />
+                                    />)
                                 }}
                             />
                             <Controller
@@ -108,7 +108,7 @@ const LoginPage = () => {
                                 control={control}
                                 render={({ field, fieldState }) => {
                                     const errorMessage = fieldState.error && fieldState.error.message
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         margin="normal"
                                         required
@@ -120,7 +120,7 @@ const LoginPage = () => {
                                         autoComplete="password"
                                         error={!!errorMessage}
                                         helperText={errorMessage}
-                                    />
+                                    />)
                                 }}
                                 rules={{
                                     validate: (value) => {
@@ -135,7 +135,7 @@ const LoginPage = () => {
                                 variant="contained"
                                 sx={{
                                     mt: 3, mb: 2, backgroundColor: '#fcc203',
-                                    fontSize:'15px',
+                                    fontSize: '15px',
                                     '&:hover': {
                                         backgroundColor: '#d69605'
                                     }
@@ -151,7 +151,7 @@ const LoginPage = () => {
                 item
                 xs={6}
                 sx={{
-                    background: '#a2b6df',
+                    background: '#5CDB95',
                     display: 'flex',
                     justifyContent: 'start',
                     alignItems: 'center',

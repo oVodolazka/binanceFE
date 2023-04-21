@@ -8,7 +8,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 export const AppLayout = ({ children }) => {
     const user = useUser()
     const authenticated = !!user;
-
     return (
         <Box>
             {authenticated && <Header />}

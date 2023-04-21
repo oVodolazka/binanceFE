@@ -60,7 +60,7 @@ const LoginPage = () => {
                             }}
                             >
                                 <p>Don&apos;t have an account?&nbsp;&nbsp;</p>
-                                <Link href="#" variant="body2" onClick={handleClickIntegration} > 
+                                <Link href="#" variant="body2" onClick={handleClickIntegration} >
                                     Sign Up
                                 </Link>
                             </Box>
@@ -70,7 +70,7 @@ const LoginPage = () => {
                                 name="email"
                                 control={control}
                                 render={({ field }) => {
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         margin="normal"
                                         required
@@ -80,14 +80,14 @@ const LoginPage = () => {
                                         name="email"
                                         autoComplete="email"
                                         autoFocus
-                                    />
+                                    />)
                                 }}
                             />
                             <Controller
                                 name="password"
                                 control={control}
                                 render={({ field }) => {
-                                    return <TextField
+                                    return (<TextField
                                         {...field}
                                         margin="normal"
                                         required
@@ -97,7 +97,7 @@ const LoginPage = () => {
                                         type="password"
                                         id="password"
                                         autoComplete="current-password"
-                                    />
+                                    />)
                                 }}
                             />
                             <Button
@@ -130,7 +130,7 @@ const LoginPage = () => {
                 item
                 xs={6}
                 sx={{
-                    background: '#a2b6df',
+                    background: '#5CDB95',
                     display: 'flex',
                     justifyContent: 'start',
                     alignItems: 'center',

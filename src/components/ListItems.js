@@ -5,28 +5,29 @@ import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShareIcon from '@mui/icons-material/Share';
 import { useNavigate } from 'react-router-dom';
+import CardTravelIcon from '@mui/icons-material/CardTravel';
 
 export const MainListItems = () => {
   const navigate = useNavigate();
 
-  const goToIntegration = () => {
-    navigate('/integration');
-  }
-  const goToDashboard = () => {
-    navigate('/dashboard');
-  }
   return <>
-    <ListItemButton onClick={goToDashboard}>
+    <ListItemButton onClick={() => navigate('/dashboard')}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton onClick={goToIntegration}>
+    <ListItemButton onClick={() => navigate('/integration')}>
       <ListItemIcon>
         <ShareIcon />
       </ListItemIcon>
       <ListItemText primary="Integration" />
+    </ListItemButton>
+    <ListItemButton onClick={() => navigate('/deposit')} >
+      <ListItemIcon>
+        <CardTravelIcon />
+      </ListItemIcon>
+      <ListItemText primary="Deposit Page" />
     </ListItemButton>
   </>
 };
