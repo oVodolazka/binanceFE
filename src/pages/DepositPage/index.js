@@ -5,7 +5,7 @@ import { useUser } from "../../components/AuthProvider";
 import MuiSelect from "../../components/MuiSelect";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QRCode from 'qrcode'
-import { NoIntegration } from "../../components/noIntegration";
+import { NoIntegration } from "../../components/NoIntegration";
 
 const Deposit = () => {
     const [coins, setCoins] = useState([]);
@@ -41,11 +41,6 @@ const Deposit = () => {
         } catch (e) {
             console.error(e)
         }
-    }
-
-    const getDepositHistory = async (coin, network) => {
-        const { data } = await api.get('/binance/depositHistory', { params: { coin, network } });
-        console.log(data)
     }
 
     const getDepositCoins = async () => {
@@ -127,9 +122,7 @@ const Deposit = () => {
                                 </Box>
                             </>
                         )}
-
                     </Box>
-                    <Button onClick={() => getDepositHistory(coin, network)}>Get history</Button>
                 </Box>
             </Box>
         )

@@ -11,6 +11,9 @@ import api from '../../api';
 import { UserContext } from '../../components/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
+const signIn = async () => (
+    await api.get("/auth/google")
+);
 const LoginPage = () => {
     const userContext = React.useContext(UserContext)
     const { control, handleSubmit } = useForm({
@@ -115,13 +118,13 @@ const LoginPage = () => {
                                 Sign In
                             </Button>
                         </form>
-
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
+                            <Button onClick={signIn}>Sign in with Google</Button>
                         </Grid>
                     </Box>
                 </Box>

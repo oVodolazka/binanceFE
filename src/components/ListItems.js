@@ -6,6 +6,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShareIcon from '@mui/icons-material/Share';
 import { useNavigate } from 'react-router-dom';
 import CardTravelIcon from '@mui/icons-material/CardTravel';
+import HistoryIcon from '@mui/icons-material/History';
 
 export const MainListItems = () => {
   const navigate = useNavigate();
@@ -28,6 +29,12 @@ export const MainListItems = () => {
         <CardTravelIcon />
       </ListItemIcon>
       <ListItemText primary="Deposit Page" />
+    </ListItemButton>
+    <ListItemButton onClick={() => navigate('/depositHistory')} >
+      <ListItemIcon>
+       <HistoryIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Deposit History" />
     </ListItemButton>
   </>
 };
