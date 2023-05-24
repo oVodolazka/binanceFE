@@ -18,11 +18,7 @@ const CircularIndeterminate = () => {
 
 const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('access_token')
-    const [user, setUser] = useState({
-        email: 'asdasd',
-        name:'name'
-    })
-    // const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null)
     const [accessToken, setAccesToken] = useState(token)
     const [loading, setLoading] = useState(false)
 
@@ -49,14 +45,6 @@ const AuthProvider = ({ children }) => {
             getMe()
         }
     }, [accessToken])
-
-
-    // useEffect(() => {
-    //     if (accessToken) {
-    //         getMe()
-    //     }
-    // }, [accessToken])
-
     if(loading) {
         return (
             <Box sx={{ fontSize: '35px', display: 'flex', alignItems: 'center', height: '100vh', justifyContent: 'center' }}>
