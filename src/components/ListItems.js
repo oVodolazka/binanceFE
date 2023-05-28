@@ -36,6 +36,12 @@ export const MainListItems = () => {
       </ListItemIcon>
       <ListItemText primary="Deposit History" />
     </ListItemButton>
+    <ListItemButton onClick={() => navigate('/withdrawHistory')} >
+      <ListItemIcon>
+       <HistoryIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Withdraw History" />
+    </ListItemButton>
   </>
 };
 

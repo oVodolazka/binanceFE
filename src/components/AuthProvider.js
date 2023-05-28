@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('access_token')
     const [user, setUser] = useState(null)
     const [accessToken, setAccesToken] = useState(token)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const getMe = async () => {
         try {
@@ -41,6 +41,7 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        setLoading(false);
         if (accessToken && !user) {
             getMe()
         }

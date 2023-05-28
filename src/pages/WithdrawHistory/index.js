@@ -1,5 +1,6 @@
 import React from "react";
 import { History } from "../../components/History";
+
 const columns = [
     {
         headerName: 'Id',
@@ -19,14 +20,18 @@ const columns = [
     },
     {
         headerName: 'Date',
-        field: 'insertTime'
+        field: 'completeTime'
+    },
+    {
+        headerName: 'Fee',
+        field: 'transactionFee'
     },
 ]
 
-const DepositHistory = () => {
+const WithdrawHistory = () => {
     return (
-        <History fetchUrl='/binance/depositHistory' columns={columns} hideDateFilters={false} />
+        <History fetchUrl='/binance/withdrawHistory' columns={columns}  hideDateFilters={true}  />
     )
 }
 
-export default DepositHistory
+export default WithdrawHistory

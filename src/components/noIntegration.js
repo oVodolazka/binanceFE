@@ -7,4 +7,3 @@ export const NoIntegration = () => (
     </Box>
   </Box>
 );
-
