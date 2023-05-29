@@ -5,7 +5,7 @@ import { useUser } from "../../components/AuthProvider";
 import MuiSelect from "../../components/MuiSelect";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QRCode from 'qrcode'
-import { NoIntegration } from "../../components/noIntegration";
+import { NoIntegration } from "../../components/NoIntegration";
 
 const Deposit = () => {
     const [coins, setCoins] = useState([]);
@@ -43,19 +43,15 @@ const Deposit = () => {
         }
     }
 
-    const getDepositHistory = async (coin, network) => {
-        const { data } = await api.get('/binance/depositHistory', { params: { coin, network } });
-        console.log(data)
-    }
-
+    const [errorMessage, setErrorMessage] = useState('')
     const getDepositCoins = async () => {
         try {
             if (user.binanceKeysExist) {
                 const { data } = await api.get('/binance/getcoins');
                 setCoins(data)
             }
-        } catch (e) {
-            console.error(e)
+        } catch (error) {
+            setErrorMessage(error.response.data)
         }
     }
 
@@ -88,6 +84,7 @@ const Deposit = () => {
         return (
             <Box sx={{ paddingTop: '94px', paddingLeft: '30px', paddingRight: '30px', backgroundColor: '#9c9e9d47', height: '100%' }}>
                 <Box sx={{ backgroundColor: '#ffffff', borderRadius: '10px', height: '600px', padding: '50px' }}>
+                    <Box sx={{ color: '#ff0000' ,height:'10px'}}>{errorMessage}</Box>
                     <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '150px' }}>
                         <p>Choose currency</p>
                         <MuiSelect
@@ -127,9 +124,7 @@ const Deposit = () => {
                                 </Box>
                             </>
                         )}
-
                     </Box>
-                    <Button onClick={() => getDepositHistory(coin, network)}>Get history</Button>
                 </Box>
             </Box>
         )

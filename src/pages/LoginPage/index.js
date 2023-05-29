@@ -115,7 +115,6 @@ const LoginPage = () => {
                                 Sign In
                             </Button>
                         </form>
-
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

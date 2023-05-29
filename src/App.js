@@ -12,6 +12,8 @@ import { AppLayout } from './components/AppLayout';
 import Integration from './pages/IntegrationPage';
 import React from 'react';
 import Deposit from './pages/DepositPage';
+import DepositHistory from './pages/DepositHistory';
+import WithdrawHistory from './pages/WithdrawHistory';
 
 const App = () => {
   return (
@@ -62,6 +64,24 @@ const App = () => {
                 element={(
                   <PrivateRoute >
                     <Deposit/>
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/depositHistory"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <DepositHistory/>
+                  </PrivateRoute>
+                )}
+              />
+                  <Route
+                path="/withdrawHistory"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <WithdrawHistory/>
                   </PrivateRoute>
                 )}
               />

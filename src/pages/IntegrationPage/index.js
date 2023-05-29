@@ -9,7 +9,6 @@ import { IntegrationSuccess } from "./IntegrationSuccess";
 const Integration = () => {
     const user = useUser();
     let [binanceKeysExist, setBinanceKeysExist] = useState(user.binanceKeysExist);
-
     const userContext = React.useContext(UserContext)
     const { control, handleSubmit } = useForm({
         defaultValues: {
