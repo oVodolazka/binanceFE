@@ -41,12 +41,14 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        setLoading(false);
         if (accessToken && !user) {
             getMe()
+        } else {
+            setLoading(false)
         }
     }, [accessToken])
-    if(loading) {
+
+    if (loading) {
         return (
             <Box sx={{ fontSize: '35px', display: 'flex', alignItems: 'center', height: '100vh', justifyContent: 'center' }}>
                 <CircularIndeterminate />

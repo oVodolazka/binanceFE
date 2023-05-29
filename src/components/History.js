@@ -15,25 +15,20 @@ import api from "../api";
 import { NoIntegration } from "./NoIntegration";
 import { useUser } from "./AuthProvider";
 
-const StartDate = ({ ...props }) => {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker {...props} />
-        </LocalizationProvider>
-    );
-}
-const EndDate = ({ ...props }) => {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker {...props} />
-        </LocalizationProvider>
-    );
-}
+const StartDate = ({ ...props }) => (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker {...props} />
+    </LocalizationProvider>)
+const EndDate = ({ ...props }) => (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker {...props} />
+    </LocalizationProvider>)
 
-export const History = ({ fetchUrl, hideDateFilters , columns }) => {
-    const today = new Date();
-    const sixtyDaysAgo = new Date();
-    sixtyDaysAgo.setDate(today.getDate() - 60);
+const today = new Date();
+const sixtyDaysAgo = new Date();
+sixtyDaysAgo.setDate(today.getDate() - 60);
+
+export const History = ({ fetchUrl, hideDateFilters, columns }) => {
     const [rows, setRows] = useState([])
     const [startValue, setStartValue] = useState(dayjs(sixtyDaysAgo));
     const [endValue, setEndValue] = useState(dayjs(today));
@@ -41,7 +36,7 @@ export const History = ({ fetchUrl, hideDateFilters , columns }) => {
     const user = useUser()
     const getHistory = async (link) => {
         try {
-            const { data } = await api.get(`${link}?start=${startTimestamp}&end=${endTimestamp}`);     
+            const { data } = await api.get(`${link}?start=${startTimestamp}&end=${endTimestamp}`);
             setRows(data)
         }
         catch (error) {
@@ -78,13 +73,13 @@ export const History = ({ fetchUrl, hideDateFilters , columns }) => {
                             />
                         </div>
                     )}
-                    <Box sx={{ color: '#ff0000' }}>{errorMessage}</Box>
+                    <Box sx={{ color: '#ff0000', height: '10px' }}>{errorMessage}</Box>
                     <TableContainer component={Paper} sx={{ margin: '60px 0', height: '80%', border: '1px solid #9c9e9d47', boxShadow: 'none', borderRadius: '10px' }}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((item) => (
-                                        <TableCell sx={{ width: '200px' }} align="left" key={item.headerName}>
+                                        <TableCell sx={{ width: '200px' }} align="left" key={item.id}>
                                             {item.headerName}
                                         </TableCell>
                                     ))}
@@ -97,7 +92,7 @@ export const History = ({ fetchUrl, hideDateFilters , columns }) => {
                                         sx={{ width: '100px' }}
                                     >
                                         {columns.map((item) => (
-                                            <TableCell align="left" key={item.headerName}>{row[item.field]}</TableCell>
+                                            <TableCell align="left" key={item.id}>{row[item.field]}</TableCell>
                                         ))}
                                     </TableRow>
                                 ))}

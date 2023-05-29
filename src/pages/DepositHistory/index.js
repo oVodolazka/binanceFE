@@ -3,30 +3,31 @@ import { History } from "../../components/History";
 const columns = [
     {
         headerName: 'Id',
-        field: 'id'
+        field: 'id',
+        id: 1
     },
     {
         headerName: 'Coin',
-        field: 'coin'
+        field: 'coin',
+        id: 2
     },
     {
         headerName: 'Network',
-        field: 'network'
+        field: 'network',
+        id: 3
     },
     {
         headerName: 'Amount',
-        field: 'amount'
+        field: 'amount',
+        id: 4
     },
     {
         headerName: 'Date',
-        field: 'insertTime'
+        field: 'insertTime',
+        id: 5
     },
 ]
 
-const DepositHistory = () => {
-    return (
-        <History fetchUrl='/binance/depositHistory' columns={columns} hideDateFilters={false} />
-    )
-}
+const DepositHistory = () => (<History fetchUrl='/binance/depositHistory' columns={columns} hideDateFilters={false} />)
 
 export default DepositHistory

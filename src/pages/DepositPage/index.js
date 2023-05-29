@@ -43,14 +43,15 @@ const Deposit = () => {
         }
     }
 
+    const [errorMessage, setErrorMessage] = useState('')
     const getDepositCoins = async () => {
         try {
             if (user.binanceKeysExist) {
                 const { data } = await api.get('/binance/getcoins');
                 setCoins(data)
             }
-        } catch (e) {
-            console.error(e)
+        } catch (error) {
+            setErrorMessage(error.response.data)
         }
     }
 
@@ -83,6 +84,7 @@ const Deposit = () => {
         return (
             <Box sx={{ paddingTop: '94px', paddingLeft: '30px', paddingRight: '30px', backgroundColor: '#9c9e9d47', height: '100%' }}>
                 <Box sx={{ backgroundColor: '#ffffff', borderRadius: '10px', height: '600px', padding: '50px' }}>
+                    <Box sx={{ color: '#ff0000' ,height:'10px'}}>{errorMessage}</Box>
                     <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '150px' }}>
                         <p>Choose currency</p>
                         <MuiSelect
