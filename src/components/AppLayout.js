@@ -1,8 +1,8 @@
-import { Header } from "./Header"
-import Navigation from "./Navigation"
-import React from "react"
-import { useUser } from "./AuthProvider"
-import { Box } from "@mui/material"
+import { Header } from './Header'
+import Navigation from './Navigation'
+import React from 'react'
+import { useUser } from './AuthProvider'
+import { Box } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline';
 
 export const AppLayout = ({ children }) => {

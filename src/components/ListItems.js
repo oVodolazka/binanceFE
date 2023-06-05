@@ -30,13 +30,13 @@ export const MainListItems = () => {
       </ListItemIcon>
       <ListItemText primary="Deposit Page" />
     </ListItemButton>
-    <ListItemButton onClick={() => navigate('/depositHistory')} >
+    <ListItemButton onClick={() => navigate('/deposit-history')} >
       <ListItemIcon>
        <HistoryIcon/>
       </ListItemIcon>
       <ListItemText primary="Deposit History" />
     </ListItemButton>
-    <ListItemButton onClick={() => navigate('/withdrawHistory')} >
+    <ListItemButton onClick={() => navigate('/withdraw-history')} >
       <ListItemIcon>
        <HistoryIcon/>
       </ListItemIcon>

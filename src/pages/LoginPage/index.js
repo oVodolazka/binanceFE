@@ -6,12 +6,13 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 import api from '../../api';
 import { UserContext } from '../../components/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+    const google = () => window.open('http://localhost:3001/auth/google', '_self');
     const userContext = React.useContext(UserContext)
     const { control, handleSubmit } = useForm({
         defaultValues: {
@@ -121,6 +122,7 @@ const LoginPage = () => {
                                     Forgot password?
                                 </Link>
                             </Grid>
+                            <Button onClick={google}>Sign in with Google</Button>
                         </Grid>
                     </Box>
                 </Box>

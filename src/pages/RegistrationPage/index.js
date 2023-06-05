@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 import api from '../../api';
 import { UserContext } from '../../components/AuthProvider';
 
@@ -21,7 +21,7 @@ const LoginPage = () => {
     });
 
     const password = useRef({});
-    password.current = watch("password", "");
+    password.current = watch('password', '');
 
     const onSubmit = async (data) => {
         try {

@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,9 +11,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import api from "../api";
-import { NoIntegration } from "./NoIntegration";
-import { useUser } from "./AuthProvider";
+import api from '../api';
+import { NoIntegration } from './NoIntegration';
+import { useUser } from './AuthProvider';
 
 const StartDate = ({ ...props }) => (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -75,11 +75,11 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
                     )}
                     <Box sx={{ color: '#ff0000', height: '10px' }}>{errorMessage}</Box>
                     <TableContainer component={Paper} sx={{ margin: '60px 0', height: '80%', border: '1px solid #9c9e9d47', boxShadow: 'none', borderRadius: '10px' }}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                             <TableHead>
                                 <TableRow>
                                     {columns.map((item) => (
-                                        <TableCell sx={{ width: '200px' }} align="left" key={item.id}>
+                                        <TableCell sx={{ width: '200px' }} align='left' key={item.id}>
                                             {item.headerName}
                                         </TableCell>
                                     ))}
@@ -92,7 +92,7 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
                                         sx={{ width: '100px' }}
                                     >
                                         {columns.map((item) => (
-                                            <TableCell align="left" key={item.id}>{row[item.field]}</TableCell>
+                                            <TableCell align='left' key={item.id}>{row[item.field]}</TableCell>
                                         ))}
                                     </TableRow>
                                 ))}
