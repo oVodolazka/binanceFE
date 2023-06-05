@@ -14,6 +14,7 @@ import React from 'react';
 import Deposit from './pages/DepositPage';
 import DepositHistory from './pages/DepositHistory';
 import WithdrawHistory from './pages/WithdrawHistory';
+import GoogleAuth from './pages/GoogleAuth';
 
 const App = () => {
   return (
@@ -28,6 +29,15 @@ const App = () => {
                 element={(
                   <PublicRoute>
                     <LoginPage />
+                  </PublicRoute>
+                )}
+              />
+              <Route
+                path="/google-login"
+                exact
+                element={(
+                  <PublicRoute>
+                    <GoogleAuth />
                   </PublicRoute>
                 )}
               />
@@ -63,25 +73,25 @@ const App = () => {
                 exact
                 element={(
                   <PrivateRoute >
-                    <Deposit/>
+                    <Deposit />
                   </PrivateRoute>
                 )}
               />
               <Route
-                path="/depositHistory"
+                path="/deposit-history"
                 exact
                 element={(
                   <PrivateRoute >
-                    <DepositHistory/>
+                    <DepositHistory />
                   </PrivateRoute>
                 )}
               />
-                  <Route
-                path="/withdrawHistory"
+              <Route
+                path="/withdraw-history"
                 exact
                 element={(
                   <PrivateRoute >
-                    <WithdrawHistory/>
+                    <WithdrawHistory />
                   </PrivateRoute>
                 )}
               />
