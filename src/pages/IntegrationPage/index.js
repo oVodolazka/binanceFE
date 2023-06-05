@@ -1,10 +1,10 @@
-import { Box, Button, TextField } from "@mui/material";
-import React from "react";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import api from "../../api";
-import { UserContext, useUser } from "../../components/AuthProvider";
-import { IntegrationSuccess } from "./IntegrationSuccess";
+import { Box, Button, TextField } from '@mui/material';
+import React from 'react';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import api from '../../api';
+import { UserContext, useUser } from '../../components/AuthProvider';
+import { IntegrationSuccess } from './IntegrationSuccess';
 
 const Integration = () => {
     const user = useUser();

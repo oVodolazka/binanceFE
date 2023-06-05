@@ -1,11 +1,11 @@
-import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import api from "../../api";
-import { useUser } from "../../components/AuthProvider";
-import MuiSelect from "../../components/MuiSelect";
+import { Box, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import api from '../../api';
+import { useUser } from '../../components/AuthProvider';
+import MuiSelect from '../../components/MuiSelect';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QRCode from 'qrcode'
-import { NoIntegration } from "../../components/NoIntegration";
+import { NoIntegration } from '../../components/NoIntegration';
 
 const Deposit = () => {
     const [coins, setCoins] = useState([]);

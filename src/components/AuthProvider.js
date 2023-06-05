@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setAccesToken('')
         setUser(null)
-        window.open("http://localhost:3001/logout", "_self");
+        window.open('http://localhost:3001/logout', '_self');
         window.localStorage.removeItem('access_token');
     }
 
