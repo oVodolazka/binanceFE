@@ -36,8 +36,10 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
     const user = useUser()
     const getHistory = async (link) => {
         try {
-            const { data } = await api.get(`${link}?start=${startTimestamp}&end=${endTimestamp}`);
-            setRows(data)
+            if(user.binanceKeysExist){
+                const { data } = await api.get(`${link}?start=${startTimestamp}&end=${endTimestamp}`);
+                setRows(data)
+            }
         }
         catch (error) {
             setErrorMessage(error.response.data)
@@ -79,7 +81,7 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
                             <TableHead>
                                 <TableRow>
                                     {columns.map((item) => (
-                                        <TableCell sx={{ width: '200px' }} align='left' key={item.id}>
+                                        <TableCell sx={{ width: '250px'}} align='left' key={item.id}>
                                             {item.headerName}
                                         </TableCell>
                                     ))}
@@ -89,10 +91,10 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
                                 {rows.map((row) => (
                                     <TableRow
                                         key={row.id}
-                                        sx={{ width: '100px' }}
+                                        sx={{ width: '250px' }}
                                     >
                                         {columns.map((item) => (
-                                            <TableCell align='left' key={item.id}>{row[item.field]}</TableCell>
+                                            <TableCell sx={{ fontSize: '13px' }} align='left' key={item.id}>{row[item.field]}</TableCell>
                                         ))}
                                     </TableRow>
                                 ))}

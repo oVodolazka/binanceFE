@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -31,6 +32,7 @@ const AppBar = styled(MuiAppBar, {
 
 
 export const Header = () => {
+    const navigate = useNavigate();
     const { logout, user } = useContext(UserContext)
     const PositionedMenu = () => {
         const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,7 +47,8 @@ export const Header = () => {
             <div>
                 <Button onClick={handleClick}>
                     <Stack direction="row" spacing={2}>
-                        <Avatar sx={{ bgcolor: '#fcc203' }}>{firstLetter}</Avatar>
+                        {user.avatar == '' ? <Avatar sx={{ bgcolor: '#fcc203' }}>{firstLetter}</Avatar> :
+                            <img style={{ maxWidth: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={user.avatar}></img>}
                     </Stack>
                 </Button>
                 <Menu
@@ -61,9 +64,9 @@ export const Header = () => {
                         horizontal: 'center',
                     }}
                 >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    <MenuItem sx={{ height: '50px', width: '180px' }} onClick={() => navigate('/profile')}>Profile</MenuItem>
+                    <MenuItem sx={{ height: '50px', width: '180px' }} onClick={handleClose}>My account</MenuItem>
+                    <MenuItem sx={{ height: '50px', width: '180px' }} onClick={logout}>Logout</MenuItem>
                 </Menu>
             </div>
         );
