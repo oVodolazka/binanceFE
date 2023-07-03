@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const setAvatar = async (avatar) => {
-        setUser({...user,avatar});
+        setUser({ ...user,avatar });
     }
 
     const logout = () => {

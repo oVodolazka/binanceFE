@@ -47,8 +47,8 @@ export const Header = () => {
             <div>
                 <Button onClick={handleClick}>
                     <Stack direction="row" spacing={2}>
-                        {user.avatar == '' ? <Avatar sx={{ bgcolor: '#fcc203' }}>{firstLetter}</Avatar> :
-                            <img style={{ maxWidth: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={user.avatar}></img>}
+                        {!user.avatar && <Avatar sx={{ bgcolor: '#fcc203' }}>{firstLetter}</Avatar>}
+                        {user.avatar && <img style={{ maxWidth: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} src={user.avatar}></img>}
                     </Stack>
                 </Button>
                 <Menu

@@ -34,10 +34,10 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
     const [endValue, setEndValue] = useState(dayjs(today));
     const [errorMessage, setErrorMessage] = useState('')
     const user = useUser()
-    const getHistory = async (link) => {
+    const getHistory = async (baseUrl) => {
         try {
             if(user.binanceKeysExist){
-                const { data } = await api.get(`${link}?start=${startTimestamp}&end=${endTimestamp}`);
+                const { data } = await api.get(`${baseUrl}?start=${startTimestamp}&end=${endTimestamp}`);
                 setRows(data)
             }
         }

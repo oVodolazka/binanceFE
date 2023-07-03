@@ -7,12 +7,12 @@ import LinearProgress from '@mui/material/LinearProgress';
 const Profile = () => {
     const user = useUser();
     const userContext = React.useContext(UserContext);
-    const firstLetter = user.name.charAt(0);
-    const [uploadProgress, setUploadProgress] = useState(0);
-    const [loading, setLoading] = useState(false)
+    const firstLetter = user.name.charAt(0).toUpperCase();
+    const [uploadProgress, setUploadProgress] = useState('');
+    const [processing, setProcessing] = useState(false)
 
     const remove = async () => {
-        await api.put('/user-avatar', { email: user.email });
+        await api.delete(`/user-avatar?email=${user.email}&id=${user._id}`);
         userContext.setAvatar('');
     };
 
@@ -31,7 +31,7 @@ const Profile = () => {
                     );
                     setUploadProgress(progress);
                     if (progress == 100) {
-                        setLoading(true)
+                        setProcessing(true)
                     }
                 },
             };
@@ -39,7 +39,8 @@ const Profile = () => {
             try {
                 const response = await api.put('/user-avatar', data, config);
                 userContext.setAvatar(response.data.url);
-                setLoading(false)
+                setProcessing(false)
+                setUploadProgress(false)
             } catch (error) {
                 console.log(error)
             }
@@ -61,19 +62,20 @@ const Profile = () => {
                                 <span><button onClick={remove}>&#10005;</button></span>
                             </label>
                             <input id="file" type="file" onChange={loadFile} />
-                            {user.avatar === '' ? (
+                            {!user.avatar &&
                                 <Box style={{ width: '165px', height: '165px', borderRadius: '50%', backgroundColor: '#fcc203', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '45px', position: 'absolute' }}>
                                     {firstLetter}
                                 </Box>
-                            ) : (
+                            }
+                            {user.avatar &&
                                 <img style={{ maxWidth: '165px', width: '165px', borderRadius: '50%', objectFit: 'cover', position: 'absolute' }} src={user.avatar} alt="User Avatar" />
-                            )}
+                            }
                         </div>
-                        {uploadProgress > 0 && uploadProgress < 100 && <Box sx={{ width: '100%' }}>
+                        {uploadProgress > 0 && <Box sx={{ width: '100%' }}>
                             <LinearProgress sx={{ marginTop: '25px' }} variant="determinate" value={uploadProgress} />
                             <Box sx={{ fontSize: '13px' }}> Upload </Box>
                         </Box>}
-                        {loading == true && <Box sx={{ width: '100%' }}>
+                        {processing && <Box sx={{ width: '100%' }}>
                             <LinearProgress sx={{ marginTop: '25px' }} />
                             <Box sx={{ fontSize: '13px' }}> Proccessing Photo... </Box>
                         </Box>}
