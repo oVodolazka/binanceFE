@@ -8,7 +8,7 @@ export const useUser = () => {
 }
 export const UserContext = createContext();
 
-const CircularIndeterminate = () => {
+export const CircularIndeterminate = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <CircularProgress />
@@ -34,10 +34,13 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    const setAvatar = async (avatar) => {
+        setUser({ ...user,avatar });
+    }
+
     const logout = () => {
         setAccesToken('')
         setUser(null)
-        window.open('http://localhost:3001/logout', '_self');
         window.localStorage.removeItem('access_token');
     }
 
@@ -57,7 +60,7 @@ const AuthProvider = ({ children }) => {
         )
     }
     return (
-        <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe }}>
+        <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe, setAvatar }}>
             {children}
         </UserContext.Provider>
     )

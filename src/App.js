@@ -15,6 +15,7 @@ import Deposit from './pages/DepositPage';
 import DepositHistory from './pages/DepositHistory';
 import WithdrawHistory from './pages/WithdrawHistory';
 import GoogleAuth from './pages/GoogleAuth';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -92,6 +93,15 @@ const App = () => {
                 element={(
                   <PrivateRoute >
                     <WithdrawHistory />
+                  </PrivateRoute>
+                )}
+              />
+               <Route
+                path="/profile"
+                exact
+                element={(
+                  <PrivateRoute >
+                    <Profile />
                   </PrivateRoute>
                 )}
               />

@@ -36,3 +36,56 @@
     transform: rotate(360deg);
   }
 }
+  .profile-pic {
+    color: transparent;
+    transition: all .9s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .profile-pic input {
+    display: none;
+  }
+
+  .profile-pic .-label {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+  }
+  .profile-pic .-label button{
+    display: none;
+    border:none;
+    background-color: transparent;
+    color: white;
+    width: 25px;
+    height: 25px;
+  }
+
+  .profile-pic:hover .-label button{
+    display: block;
+  }
+
+  .profile-pic .-label button:hover{
+    background-color: #d22525ad;
+    border-radius: 50%;
+  }
+
+  .profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 10000;
+    color: rgb(250, 250, 250);
+    transition: background-color .2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+  }
+  
+  .profile-pic span {
+    display: inline-flex;
+    padding: .2em;
+    height: 2em;
+  }
