@@ -1,12 +1,12 @@
 import { Header } from './Header'
 import Navigation from './Navigation'
 import React from 'react'
-import { useUser } from './AuthProvider'
 import { Box } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline';
+import { useSelector } from 'react-redux';
 
 export const AppLayout = ({ children }) => {
-    const user = useUser()
+    const user = useSelector((state) => state.user.data)
     const authenticated = !!user;
     return (
         <Box>

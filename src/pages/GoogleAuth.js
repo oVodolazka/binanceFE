@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { UserContext } from '../components/AuthProvider';
+import { UserContext } from '../components/AuthFilter';
 
 const GoogleAuth = () => {
     const userContext = React.useContext(UserContext)

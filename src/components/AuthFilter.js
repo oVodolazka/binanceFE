@@ -1,11 +1,9 @@
 import { Box } from '@mui/material';
-import { useEffect, useState, createContext, useContext } from 'react';
-import api from '../api';
+import { useEffect, useState, createContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-export const useUser = () => {
-    const { user } = useContext(UserContext);
-    return user
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, removeUser, updateUser } from './User/userSlice';
+
 export const UserContext = createContext();
 
 export const CircularIndeterminate = () => {
@@ -18,39 +16,31 @@ export const CircularIndeterminate = () => {
 
 const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('access_token')
-    const [user, setUser] = useState(null)
     const [accessToken, setAccesToken] = useState(token)
-    const [loading, setLoading] = useState(true)
+    const user = useSelector((state) => state.user.data);
+    const loading = useSelector((state) => state.user.loading);
+    const dispatch = useDispatch()
 
-    const getMe = async () => {
-        try {
-            setLoading(true);
-            const data = await api.get('/users/me');
-            setUser(data.data.user);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    const setAvatar = async (avatar) => {
-        setUser({ ...user,avatar });
+    const setAvatar = (avatar) => {
+        console.log(avatar, 'auth')
+        dispatch(updateUser({ ...user, avatar }))
     }
 
     const logout = () => {
         setAccesToken('')
-        setUser(null)
+        dispatch(removeUser(null));
         window.localStorage.removeItem('access_token');
     }
 
     useEffect(() => {
         if (accessToken && !user) {
-            getMe()
-        } else {
-            setLoading(false)
-        }
+            dispatch(getUser());
+        } 
     }, [accessToken])
+
+    useEffect(() => {
+        dispatch(getUser());
+    }, []);
 
     if (loading) {
         return (
@@ -60,7 +50,7 @@ const AuthProvider = ({ children }) => {
         )
     }
     return (
-        <UserContext.Provider value={{ user, setAccesToken, setUser, logout, getMe, setAvatar }}>
+        <UserContext.Provider value={{ setAccesToken, logout, setAvatar }}>
             {children}
         </UserContext.Provider>
     )

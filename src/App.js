@@ -2,7 +2,7 @@ import './App.css';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import { ThemeProvider } from '@mui/material/styles';
-import AuthProvider from './components/AuthProvider';
+import AuthProvider from './components/AuthFilter';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';

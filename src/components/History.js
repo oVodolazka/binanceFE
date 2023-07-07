@@ -13,7 +13,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import api from '../api';
 import { NoIntegration } from './NoIntegration';
-import { useUser } from './AuthProvider';
+import { useSelector } from 'react-redux';
 
 const StartDate = ({ ...props }) => (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -33,7 +33,8 @@ export const History = ({ fetchUrl, hideDateFilters, columns }) => {
     const [startValue, setStartValue] = useState(dayjs(sixtyDaysAgo));
     const [endValue, setEndValue] = useState(dayjs(today));
     const [errorMessage, setErrorMessage] = useState('')
-    const user = useUser()
+    const user = useSelector((state) => state.user.data)
+
     const getHistory = async (baseUrl) => {
         try {
             if(user.binanceKeysExist){

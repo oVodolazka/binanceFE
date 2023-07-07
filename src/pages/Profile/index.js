@@ -1,11 +1,12 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
 import api from '../../api';
-import { UserContext, useUser } from '../../components/AuthProvider';
+import { UserContext } from '../../components/AuthFilter';
 import LinearProgress from '@mui/material/LinearProgress';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
-    const user = useUser();
+    const user = useSelector((state) => state.user.data)
     const userContext = React.useContext(UserContext);
     const firstLetter = user.name.charAt(0).toUpperCase();
     const [uploadProgress, setUploadProgress] = useState('');

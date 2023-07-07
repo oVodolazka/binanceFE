@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useForm, Controller } from 'react-hook-form';
 import api from '../../api';
-import { UserContext } from '../../components/AuthProvider';
+import { UserContext } from '../../components/AuthFilter';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
