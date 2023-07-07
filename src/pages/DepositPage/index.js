@@ -1,11 +1,11 @@
 import { Box, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import api from '../../api';
-import { useUser } from '../../components/AuthProvider';
 import MuiSelect from '../../components/MuiSelect';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QRCode from 'qrcode'
 import { NoIntegration } from '../../components/NoIntegration';
+import { useSelector } from 'react-redux';
 
 const Deposit = () => {
     const [coins, setCoins] = useState([]);
@@ -14,7 +14,7 @@ const Deposit = () => {
     const [networkData, setNetworkData] = useState([]);
     const [address, setAddress] = useState('');
     const [qrImage, setQrImage] = useState('');
-    const user = useUser()
+    const user = useSelector((state) => state.user.data)
 
     const handleNetworkChange = event => {
         setNetwork(event.target.value);
@@ -84,7 +84,7 @@ const Deposit = () => {
         return (
             <Box sx={{ paddingTop: '94px', paddingLeft: '30px', paddingRight: '30px', backgroundColor: '#9c9e9d47', height: '100%' }}>
                 <Box sx={{ backgroundColor: '#ffffff', borderRadius: '10px', height: '600px', padding: '50px' }}>
-                    <Box sx={{ color: '#ff0000' ,height:'10px'}}>{errorMessage}</Box>
+                    <Box sx={{ color: '#ff0000', height: '10px' }}>{errorMessage}</Box>
                     <Box sx={{ display: 'flex', flexFlow: 'row', width: '700px', justifyContent: 'space-between', paddingBottom: '60px', height: '150px' }}>
                         <p>Choose currency</p>
                         <MuiSelect

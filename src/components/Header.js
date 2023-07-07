@@ -1,15 +1,16 @@
 import Typography from '@mui/material/Typography';
 import MuiAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
-import React, { useContext } from 'react';
+import React from 'react';
 import Toolbar from '@mui/material/Toolbar';
-import { UserContext } from './AuthProvider';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setAccessToken } from './User/userSlice';
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -33,7 +34,13 @@ const AppBar = styled(MuiAppBar, {
 
 export const Header = () => {
     const navigate = useNavigate();
-    const { logout, user } = useContext(UserContext)
+    const dispatch = useDispatch()
+    const logout = () => {
+        dispatch(setAccessToken(''))
+        dispatch(setUser(null));
+        window.localStorage.removeItem('access_token');
+    }
+    const user = useSelector((state) => state.user.data)
     const PositionedMenu = () => {
         const [anchorEl, setAnchorEl] = React.useState(null);
         const handleClick = (event) => {

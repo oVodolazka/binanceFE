@@ -3,13 +3,14 @@ import React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import api from '../../api';
-import { UserContext, useUser } from '../../components/AuthProvider';
 import { IntegrationSuccess } from './IntegrationSuccess';
+import { useDispatch , useSelector} from 'react-redux';
+import { getUser } from '../../components/User/userSlice';
 
 const Integration = () => {
-    const user = useUser();
+    const user = useSelector((state) => state.user.data)
     let [binanceKeysExist, setBinanceKeysExist] = useState(user.binanceKeysExist);
-    const userContext = React.useContext(UserContext)
+    const dispatch = useDispatch()
     const { control, handleSubmit } = useForm({
         defaultValues: {
             apiKey: '',
@@ -19,7 +20,7 @@ const Integration = () => {
     const onSubmit = async (data) => {
         try {
             await api.post('/binance/integration', { apiKey: data.apiKey, secretKey: data.secretKey })
-            userContext.getMe()
+            dispatch(getUser());
         } catch (e) {
             console.log(e)
         }
@@ -32,7 +33,7 @@ const Integration = () => {
     const onRemoveKeys = async () => {
         try {
             await api.post('binance/integration')
-            userContext.getMe()
+            dispatch(getUser());
         } catch (e) {
             console.log(e)
         }

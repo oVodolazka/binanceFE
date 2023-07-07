@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useUser } from './AuthProvider';
+import { useSelector } from 'react-redux';
 
 const PublicRoute = ({ children }) => {
-  const user = useUser();
+  const user = useSelector((state) => state.user.data)
   return user ? <Navigate to="/dashboard" /> : children
 };
 
