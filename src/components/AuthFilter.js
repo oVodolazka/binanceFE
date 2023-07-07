@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, createContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, removeUser, updateUser } from './User/userSlice';
+import { getUser, setAccessToken, setLoading } from './User/userSlice';
 
 export const UserContext = createContext();
 
@@ -14,33 +14,24 @@ export const CircularIndeterminate = () => {
     );
 }
 
-const AuthProvider = ({ children }) => {
+const AuthFilter = ({ children }) => {
     const token = localStorage.getItem('access_token')
-    const [accessToken, setAccesToken] = useState(token)
     const user = useSelector((state) => state.user.data);
     const loading = useSelector((state) => state.user.loading);
+    const accessToken = useSelector((state) => state.user.accessToken) || token;
     const dispatch = useDispatch()
-
-    const setAvatar = (avatar) => {
-        console.log(avatar, 'auth')
-        dispatch(updateUser({ ...user, avatar }))
-    }
-
-    const logout = () => {
-        setAccesToken('')
-        dispatch(removeUser(null));
-        window.localStorage.removeItem('access_token');
-    }
 
     useEffect(() => {
         if (accessToken && !user) {
             dispatch(getUser());
-        } 
+        } else {
+            dispatch(setLoading(false))
+        }
     }, [accessToken])
 
     useEffect(() => {
-        dispatch(getUser());
-    }, []);
+        dispatch(setAccessToken(token))
+    }, [token]);
 
     if (loading) {
         return (
@@ -49,11 +40,7 @@ const AuthProvider = ({ children }) => {
             </Box>
         )
     }
-    return (
-        <UserContext.Provider value={{ setAccesToken, logout, setAvatar }}>
-            {children}
-        </UserContext.Provider>
-    )
+    return children
 }
 
-export default AuthProvider
+export default AuthFilter

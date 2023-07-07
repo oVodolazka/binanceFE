@@ -10,10 +10,12 @@ import { useForm, Controller } from 'react-hook-form';
 import api from '../../api';
 import { UserContext } from '../../components/AuthFilter';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../../components/User/userSlice';
 
 const LoginPage = () => {
     const google = () => window.open('http://localhost:3001/auth/google', '_self');
-    const userContext = React.useContext(UserContext)
+    const dispatch = useDispatch()
     const { control, handleSubmit } = useForm({
         defaultValues: {
             email: '',
@@ -24,7 +26,7 @@ const LoginPage = () => {
         try {
             const user = await api.post('/users/login', { email: data.email, password: data.password })
             window.localStorage.setItem('access_token', user.data.token)
-            userContext.setAccesToken(user.data.token)
+            dispatch(setAccessToken(user.data.token))
         } catch (e) {
             console.log(e)
         }

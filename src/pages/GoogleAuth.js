@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
-import { UserContext } from '../components/AuthFilter';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../components/User/userSlice';
 
 const GoogleAuth = () => {
-    const userContext = React.useContext(UserContext)
+    const dispatch = useDispatch()
     useEffect(() => {
         fetch('http://localhost:3001/login/success', {
             method: 'GET',
@@ -19,7 +20,7 @@ const GoogleAuth = () => {
             })
             .then((resObject) => {
                 window.localStorage.setItem('access_token', resObject.token)
-                userContext.setAccesToken(resObject.token)
+                dispatch(setAccessToken(resObject.token))
             })
             .catch((err) => {
                 console.log(err);

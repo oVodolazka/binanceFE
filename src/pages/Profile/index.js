@@ -1,20 +1,22 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
 import api from '../../api';
-import { UserContext } from '../../components/AuthFilter';
 import LinearProgress from '@mui/material/LinearProgress';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../components/User/userSlice';
 
 const Profile = () => {
     const user = useSelector((state) => state.user.data)
-    const userContext = React.useContext(UserContext);
     const firstLetter = user.name.charAt(0).toUpperCase();
     const [uploadProgress, setUploadProgress] = useState('');
     const [processing, setProcessing] = useState(false)
-
+    const dispatch = useDispatch()
+    const setAvatar = (avatar) => {
+        dispatch(setUser({ ...user, avatar }))
+    }
     const remove = async () => {
         await api.delete(`/user-avatar?email=${user.email}&id=${user._id}`);
-        userContext.setAvatar('');
+        setAvatar('')
     };
 
     const loadFile = async (e) => {
@@ -39,7 +41,7 @@ const Profile = () => {
 
             try {
                 const response = await api.put('/user-avatar', data, config);
-                userContext.setAvatar(response.data.url);
+                setAvatar(response.data.url);
                 setProcessing(false)
                 setUploadProgress(false)
             } catch (error) {

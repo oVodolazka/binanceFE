@@ -7,10 +7,10 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useForm, Controller } from 'react-hook-form';
 import api from '../../api';
-import { UserContext } from '../../components/AuthFilter';
+import { setAccessToken } from '../../components/User/userSlice';
 
 const LoginPage = () => {
-    const userContext = React.useContext(UserContext)
+    const dispatch = useDispatch()
     const { control, handleSubmit, watch } = useForm({
         defaultValues: {
             name: '',
@@ -27,7 +27,7 @@ const LoginPage = () => {
         try {
             const user = await api.post('/users/register', { name: data.name, email: data.email, password: data.password, confirmPassword: data.confirmPassword })
             window.localStorage.setItem('access_token', user.data.token)
-            userContext.setAccesToken(user.data.token)
+            dispatch(setAccessToken(user.data.token))
         } catch (e) {
             console.log(e)
         }

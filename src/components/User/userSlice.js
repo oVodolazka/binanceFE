@@ -3,18 +3,22 @@ import api from "../../api";
 
 const initialState = {
     loading: true,
-    data: null
+    data: null,
+    accessToken: null
 };
 
 const userSlice = createSlice({
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
-        removeUser: (state, action) => {
+        setUser: (state, action) => {
             state.data = action.payload
         },
-        updateUser: (state, action) => {
-            state.data = action.payload
+        setAccessToken: (state, action) => {
+            state.accessToken = action.payload
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -41,6 +45,6 @@ export const getUser = createAsyncThunk('auth/getUser', async () => {
     }
 });
 
-export const { removeUser, updateUser } = userSlice.actions;
+export const { setUser, setAccessToken, setLoading } = userSlice.actions;
 
 export default userSlice.reducer;
