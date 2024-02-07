@@ -41,6 +41,7 @@ export const getUser = createAsyncThunk('auth/getUser', async () => {
         const response = await api.get('/users/me');
         return response.data.user;
     } catch (error) {
+        console.log(error);
         throw error;
     }
 });
